@@ -38,6 +38,9 @@ type Meta struct {
 	input         bool
 	variables     map[string]string
 
+	// Targets for this context (private)
+	targets []string
+
 	color bool
 	oldUi cli.Ui
 
@@ -260,6 +263,7 @@ func (m *Meta) contextOpts() *terraform.ContextOpts {
 		vs[k] = v
 	}
 	opts.Variables = vs
+	opts.Targets = m.targets
 	opts.UIInput = m.UIInput()
 
 	return &opts
@@ -271,6 +275,7 @@ func (m *Meta) flagSet(n string) *flag.FlagSet {
 	f.BoolVar(&m.input, "input", true, "input")
 	f.Var((*FlagKV)(&m.variables), "var", "variables")
 	f.Var((*FlagKVFile)(&m.variables), "var-file", "variable file")
+	f.Var((*FlagStringSlice)(&m.targets), "target", "resource to target")
 
 	if m.autoKey != "" {
 		f.Var((*FlagKVFile)(&m.autoVariables), m.autoKey, "variable file")

@@ -65,6 +65,9 @@ type BuiltinGraphBuilder struct {
 
 	// Provisioners is the list of provisioners supported.
 	Provisioners []string
+
+	// Targets is the user-specified list of resources to target.
+	Targets []string
 }
 
 // Build builds the graph according to the steps returned by Steps.
@@ -103,6 +106,10 @@ func (b *BuiltinGraphBuilder) Steps() []GraphTransformer {
 				},
 			},
 		},
+
+		// Optionally reduces the graph to a user-specified list of targets and
+		// their dependencies.
+		&TargetsTransformer{Targets: b.Targets},
 
 		// Create the destruction nodes
 		&DestroyTransformer{},

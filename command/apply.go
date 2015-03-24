@@ -319,6 +319,10 @@ Options:
                          "-state". This can be used to preserve the old
                          state.
 
+  -target=resource       Resource to target. Operation will be limited to this
+                         resource and its dependencies. This flag can be used
+                         multiple times.
+
   -var 'foo=bar'         Set a variable in the Terraform configuration. This
                          flag can be set multiple times.
 
@@ -356,6 +360,10 @@ Options:
   -state-out=path        Path to write state to that is different than
                          "-state". This can be used to preserve the old
                          state.
+
+  -target=resource       Resource to target. Operation will be limited to this
+                         resource and its dependencies. This flag can be used
+                         multiple times.
 
   -var 'foo=bar'         Set a variable in the Terraform configuration. This
                          flag can be set multiple times.

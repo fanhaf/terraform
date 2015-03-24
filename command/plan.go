@@ -168,6 +168,10 @@ Options:
                       up Terraform-managed resources. By default it will
                       use the state "terraform.tfstate" if it exists.
 
+  -target=resource    Resource to target. Operation will be limited to this
+                      resource and its dependencies. This flag can be used
+                      multiple times.
+
   -var 'foo=bar'      Set a variable in the Terraform configuration. This
                       flag can be set multiple times.
 

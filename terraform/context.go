@@ -37,6 +37,7 @@ type ContextOpts struct {
 	State        *State
 	Providers    map[string]ResourceProviderFactory
 	Provisioners map[string]ResourceProvisionerFactory
+	Targets      []string
 	Variables    map[string]string
 
 	UIInput UIInput
@@ -55,6 +56,7 @@ type Context struct {
 	sh           *stopHook
 	state        *State
 	stateLock    sync.RWMutex
+	targets      []string
 	uiInput      UIInput
 	variables    map[string]string
 
@@ -98,6 +100,7 @@ func NewContext(opts *ContextOpts) *Context {
 		providers:    opts.Providers,
 		provisioners: opts.Provisioners,
 		state:        state,
+		targets:      opts.Targets,
 		uiInput:      opts.UIInput,
 		variables:    opts.Variables,
 
@@ -132,6 +135,7 @@ func (c *Context) GraphBuilder() GraphBuilder {
 		Providers:    providers,
 		Provisioners: provisioners,
 		State:        c.state,
+		Targets:      c.targets,
 	}
 }
 
